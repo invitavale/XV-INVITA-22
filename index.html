@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yerianny - Mis XV Años</title>
+    <meta name="theme-color" content="#1E3557">
+    <link rel="preload" as="image" href="foto0.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400&family=Cormorant+Garamond:ital,wght@0,500;1,400;1,500&family=Great+Vibes&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="CCSB.css?v=20261118b">
+</head>
+<body>
+    <!-- ============ Modal de Bienvenida ============ -->
+    <div id="welcomeModal" class="modal-overlay">
+        <div class="welcome-hero">
+            <img class="welcome-carriage" src="carroza.png" alt="Carroza de cristal">
+            <h1 class="welcome-title">Bienvenidos a la<br>invitación de mis<br><span>XV Años</span></h1>
+            <p class="welcome-note">La música de fondo es parte de la experiencia</p>
+            <div class="welcome-actions">
+                <button id="enterWithMusic" class="btn-royal" onclick="enterWithMusicClick()">Ingresar con música</button>
+                <button id="enterWithoutMusic" class="btn-royal-outline" onclick="enterWithoutMusicClick()">Ingresar sin música</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ Reproductor de música ============ -->
+    <div id="musicPlayer" class="music-player" style="display: none;">
+        <button id="musicToggle" class="music-button" title="Reproducir/Pausar música" aria-label="Reproducir o pausar música">
+            <svg id="volumeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="#FBF8F2"></polygon>
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.08" stroke="#E6CF8F" stroke-width="2" stroke-linecap="round"></path>
+            </svg>
+        </button>
+        <audio id="bgMusic" src="musica.mp3" preload="auto" loop playsinline></audio>
+    </div>
+
+    <!-- ============ Portada (fija) ============ -->
+    <header class="hero-section">
+        <img class="hero-bg" src="foto0.jpg" alt="Portada XV años de Yerianny">
+        <div class="hero-overlay"></div>
+        <div class="top-garland"><img src="separador-flores.png" alt=""></div>
+        <div class="hero-content">
+            <p class="hero-kicker">Mis XV Años</p>
+            <h1 class="names">Yerianny</h1>
+            <p class="hero-date">14 · 08 · 2027</p>
+            <div class="scroll-indicator" aria-hidden="true">
+                <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============ Contenido ============ -->
+    <main class="content">
+
+        <div class="intro-block">
+        <div class="ribbon-rail ribbon-left" aria-hidden="true"></div>
+        <div class="ribbon-rail ribbon-right" aria-hidden="true"></div>
+        <!-- Escena del castillo + cuenta regresiva -->
+        <section class="countdown-section">
+            <div class="countdown-card">
+                <img class="card-crown" src="tiara2.png" alt="">
+                <h2 class="script-title">Falta</h2>
+                <div class="gold-rule"><span>&#9829;</span></div>
+                <div class="countdown-container">
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="days">00</div>
+                        <div class="countdown-label">Días</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="hours">00</div>
+                        <div class="countdown-label">Horas</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="minutes">00</div>
+                        <div class="countdown-label">Minutos</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="seconds">00</div>
+                        <div class="countdown-label">Segundos</div>
+                    </div>
+                </div>
+                <img class="card-flowers" src="separador-flores.png" alt="">
+            </div>
+        </section>
+
+        <!-- Bendición en la iglesia -->
+        <section class="events-section church-section">
+            <div class="event-card">
+                <img class="church-icon" src="iglesia.png" alt="Iglesia">
+                <div class="gold-rule wide"><span>&#9829;</span></div>
+                <h2 class="event-title">Bendición en la Iglesia</h2>
+                <div class="gold-rule wide"><span>&#9829;</span></div>
+
+                <div class="event-details">
+                    <h4>Día</h4>
+                    <p>Sábado 14 de Agosto - 3:30 PM</p>
+                </div>
+                <div class="event-details">
+                    <h4>Lugar</h4>
+                    <p>Parroquia Nuestra Señora de Ejemplo</p>
+                </div>
+                <button class="btn-royal" onclick="openLocation('ceremony')"><svg class="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"></path><circle cx="12" cy="10" r="2.6"></circle></svg>¿Cómo llegar?</button>
+            </div>
+        </section>
+
+        <!-- Fiesta: día y lugar -->
+        <section class="events-section">
+            <div class="event-card">
+                <img class="slipper" src="zapatilla.png" alt="Zapatilla de cristal">
+                <div class="gold-rule wide"><span>&#9829;</span></div>
+                <h2 class="event-title">Fiesta de XV Años</h2>
+                <div class="gold-rule wide"><span>&#9829;</span></div>
+
+                <div class="event-details">
+                    <h4>Día</h4>
+                    <p>Sábado 14 de Agosto - 5:00 PM</p>
+                    <p class="event-punctuality">La recepción sigue a la bienvenida</p>
+                </div>
+                <div class="event-details">
+                    <h4>Lugar</h4>
+                    <p>Salón de Eventos Ejemplo</p>
+                </div>
+                <button class="btn-royal" onclick="openLocation('reception')"><svg class="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"></path><circle cx="12" cy="10" r="2.6"></circle></svg>¿Cómo llegar?</button>
+            </div>
+        </section>
+
+        </div>
+
+        <div class="section-divider"><img src="separador-flores.png" alt=""></div>
+
+        <!-- Galería -->
+        <section class="gallery-section">
+            <div class="gallery-container">
+                <img class="section-icon" src="espejo-corazon.png" alt="">
+                <h2 class="section-title">Retratos de mis 15 Años</h2>
+                <p class="section-subtitle">Cada foto guarda un pedacito de este cuento que hoy se hace realidad</p>
+
+                <div class="carousel-container">
+                    <button class="carousel-btn carousel-prev" id="prevBtn" aria-label="Anterior">&#10094;</button>
+                    <div class="carousel-track-container">
+                        <div class="carousel-track" id="carouselTrack">
+                            <div class="carousel-item"><img class="framed-photo" src="foto1.jpg" alt="Foto 1 de los XV años"></div>
+                            <div class="carousel-item"><img class="framed-photo" src="foto2.jpg" alt="Foto 2 de los XV años"></div>
+                            <div class="carousel-item"><img class="framed-photo" src="foto3.jpg" alt="Foto 3 de los XV años"></div>
+                        </div>
+                    </div>
+                    <button class="carousel-btn carousel-next" id="nextBtn" aria-label="Siguiente">&#10095;</button>
+                </div>
+                <div class="carousel-dots" id="carouselDots" aria-hidden="true"></div>
+                <div class="carousel-counter"><span id="currentSlide">1</span> / <span id="totalSlides">3</span> fotos</div>
+            </div>
+        </section>
+
+        <div class="section-divider"><img src="separador-flores.png" alt=""></div>
+
+        <!-- Información de la fiesta -->
+        <section class="party-section">
+            <div class="party-container">
+                <h2 class="section-title">Fiesta</h2>
+                <p class="section-subtitle">Hagamos juntos una noche mágica. Aquí algunos detalles a tener en cuenta.</p>
+                <div class="party-grid">
+                    <div class="party-card">
+                        <img class="party-icon" src="tiara.png" alt="Tiara">
+                        <h3>Código de Vestimenta</h3>
+                        <p>Formal</p>
+                        <button class="btn-royal" onclick="showDressCode()">Ver más</button>
+                    </div>
+                    <div class="party-card">
+                        <img class="party-icon tall" src="carroza.png" alt="Carroza">
+                        <h3>Comparte tus Fotos</h3>
+                        <p>Ayúdanos a capturar cada momento, sube las fotos que tomes durante la fiesta.</p>
+                        <button class="btn-royal" onclick="sharePhotos()">Subir Fotos</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"><img src="separador-flores.png" alt=""></div>
+
+        <!-- Regalos -->
+        <section class="gifts-section">
+            <div class="gifts-container">
+                <img class="section-icon bow" src="lazo2.png" alt="Lazo de regalo">
+                <h2 class="section-title">Regalos</h2>
+                <p class="section-subtitle">Si deseas regalarme algo más que tu hermosa presencia.</p>
+                <button class="btn-royal" onclick="showGifts()">Ver más</button>
+            </div>
+        </section>
+
+        <div class="section-divider"><img src="separador-flores.png" alt=""></div>
+
+        <!-- Confirmación -->
+        <section class="rsvp-section">
+            <div class="rsvp-container">
+                <img class="section-icon clock" src="reloj.png" alt="Reloj de medianoche">
+                <h2 class="section-title">Confirma tu Asistencia</h2>
+                <p class="section-subtitle">Antes de que el reloj marque la medianoche… por favor confirma antes del 31 de Julio de 2027</p>
+                <button class="btn-royal" onclick="confirmAttendance()">Confirmar Asistencia</button>
+            </div>
+        </section>
+
+        <!-- Pie -->
+        <footer class="footer">
+            <div class="footer-scene">
+                <img class="footer-castle" src="castillo.png" alt="Castillo">
+                <img class="footer-princess" src="cenicienta.png" alt="Cenicienta camino al castillo">
+            </div>
+            <p>Con cariño,</p>
+            <h3>Yerianny</h3>
+            <p class="footer-date">14 de Agosto, 2027</p>
+        </footer>
+    </main>
+
+    <!-- ============ Modal Código de Vestimenta ============ -->
+    <div id="dresscodeModal" class="modal-overlay" onclick="closeDressCodeModal(event)">
+        <div class="dresscode-modal" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeDressCodeModal()" aria-label="Cerrar">&times;</button>
+            <img class="modal-crown" src="tiara2.png" alt="">
+            <h2 class="modal-title">Código de Vestimenta</h2>
+            <p class="modal-text">Formal</p>
+            <p class="modal-text soft">El color azul es exclusivo de la quinceañera</p>
+            <div class="dresscode-colors">
+                <span class="color-dot" style="background:#2C4D7E;" title="Azul: solo la quinceañera"></span>
+                <span class="color-dot" style="background:#A9C6EC;" title="Azul: solo la quinceañera"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ Modal Regalos ============ -->
+    <div id="giftsModal" class="modal-overlay" onclick="closeGiftsModal()">
+        <div class="dresscode-modal gifts-modal" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeGiftsModal()" aria-label="Cerrar">&times;</button>
+            <img class="modal-crown" src="tiara2.png" alt="">
+            <h2 class="modal-title">Regalos</h2>
+            <p class="modal-text soft">Tu presencia es mi mejor regalo. Si deseas hacerme un obsequio, puedes hacerlo aquí:</p>
+            <div class="bank-card">
+                <p class="bank-label">Banco</p>
+                <p class="bank-value">Banco Ejemplo</p>
+                <p class="bank-label">Tipo de cuenta</p>
+                <p class="bank-value">Cuenta de ahorro</p>
+                <p class="bank-label">Número de cuenta</p>
+                <div class="copy-row">
+                    <p class="bank-value bank-number" id="accountNumber">0000000000</p>
+                    <button class="copy-btn" onclick="copyText('accountNumber', this)" aria-label="Copiar número de cuenta" title="Copiar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button>
+                </div>
+                <p class="bank-label">Cédula</p>
+                <div class="copy-row">
+                    <p class="bank-value bank-number" id="cedulaNumber">000-0000000-0</p>
+                    <button class="copy-btn" onclick="copyText('cedulaNumber', this)" aria-label="Copiar cédula" title="Copiar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button>
+                </div>
+                <p class="bank-label">Titular</p>
+                <p class="bank-value">Nombre del Titular</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast" class="toast"><div id="toastContent"></div></div>
+
+    <script src="JAVAB.js?v=20261118b" defer></script>
+</body>
+</html>

@@ -1,0 +1,1085 @@
+/* =========================================================
+   XV Años · Tema Cenicienta
+   Paleta: azul noche, azul porcelana, celeste hielo, dorado
+   ========================================================= */
+:root {
+    --navy-deep: #16294A;
+    --navy: #1E3557;
+    --royal: #2C4D7E;      /* títulos y números */
+    --slate: #5D799C;      /* botones */
+    --slate-light: #7F9CC2;
+    --sky: #DCE6F2;        /* fondo principal */
+    --ice: #EEF3FA;
+    --mist: #C6D5E8;
+    --gold: #C9A24A;
+    --gold-light: #E6CF8F;
+    --gold-dark: #A8812F;
+    --ivory: #FBF8F2;
+    --text: #3C4D66;
+    --text-soft: #6E7F99;
+
+    --font-script: 'Great Vibes', cursive;
+    --font-title: 'Bodoni Moda', 'Playfair Display', serif;
+    --font-italic: 'Cormorant Garamond', serif;
+    --font-body: 'Inter', system-ui, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+    width: 100%;
+    min-height: 100%;
+    overflow-x: hidden;
+    background: var(--navy-deep);
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; }
+
+button { font-family: var(--font-body); }
+
+/* =========================================================
+   Botones
+   ========================================================= */
+.btn-royal {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    padding: .85rem 2.4rem;
+    border-radius: 9999px;
+    border: 1.5px solid var(--gold-light);
+    background: linear-gradient(180deg, var(--slate-light) 0%, var(--slate) 55%, #4E6A8F 100%);
+    color: #fff;
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: .02em;
+    cursor: pointer;
+    box-shadow: 0 6px 18px -6px rgba(30, 53, 87, .55), inset 0 1px 0 rgba(255,255,255,.25);
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+.btn-royal:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px -8px rgba(30, 53, 87, .65), 0 0 0 4px rgba(230, 207, 143, .25);
+}
+
+.btn-royal-outline {
+    padding: .8rem 1.6rem;
+    border-radius: 9999px;
+    border: 1px solid var(--gold-light);
+    background: transparent;
+    color: var(--gold-light);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color .2s ease;
+}
+.btn-royal-outline:hover { background: rgba(230, 207, 143, .12); }
+
+/* =========================================================
+   Modales (base)
+   ========================================================= */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    display: none; /* JS lo muestra */
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    background: rgba(14, 26, 48, .82);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 1rem;
+}
+
+/* Bienvenida */
+#welcomeModal {
+    background:
+        url('brillos.png') repeat,
+        radial-gradient(ellipse at 50% 35%, #2C4D7E 0%, #16294A 60%, #0C182D 100%);
+    background-size: 380px, cover;
+    backdrop-filter: none;
+}
+
+.welcome-hero {
+    text-align: center;
+    max-width: 560px;
+    padding: 1.5rem;
+}
+
+.welcome-carriage {
+    width: min(230px, 58vw);
+    margin: 0 auto 1rem;
+    display: block;
+    filter: drop-shadow(0 0 28px rgba(230, 207, 143, .45));
+    animation: float 4s ease-in-out infinite;
+}
+
+.welcome-title {
+    font-family: var(--font-title);
+    font-weight: 500;
+    color: var(--ivory);
+    font-size: clamp(1.4rem, 5vw, 2rem);
+    line-height: 1.25;
+    margin-bottom: 1rem;
+}
+.welcome-title span {
+    display: inline-block;
+    margin-top: .3rem;
+    font-family: var(--font-script);
+    font-weight: 400;
+    font-size: 1.7em;
+    color: var(--gold-light);
+    text-shadow: 0 0 18px rgba(230, 207, 143, .45);
+}
+
+.welcome-note {
+    color: rgba(238, 243, 250, .7);
+    font-size: .9rem;
+    margin-bottom: 1.4rem;
+}
+
+.welcome-actions {
+    display: flex;
+    gap: .75rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* =========================================================
+   Reproductor
+   ========================================================= */
+.music-player {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1000;
+}
+.music-button {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1.5px solid var(--gold-light);
+    background: linear-gradient(135deg, var(--slate), var(--navy));
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 18px rgba(14, 26, 48, .4);
+    transition: transform .2s ease;
+}
+.music-button:hover { transform: scale(1.06); }
+
+/* =========================================================
+   Portada fija (se revela detrás del contenido al hacer scroll)
+   ========================================================= */
+.hero-section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100svh;
+    z-index: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
+    object-position: center 25%;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(180deg, rgba(22,41,74,.35) 0%, rgba(22,41,74,0) 28%, rgba(22,41,74,0) 48%, rgba(22,41,74,.75) 82%, rgba(14,26,48,.92) 100%);
+}
+
+.top-garland {
+    position: absolute;
+    top: -70px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(720px, 120vw);
+    z-index: 2;
+    pointer-events: none;
+}
+.top-garland img { width: 100%; display: block; }
+
+.hero-content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    padding: 0 1rem calc(2.5rem + env(safe-area-inset-bottom));
+    color: var(--ivory);
+}
+
+.hero-kicker {
+    font-family: var(--font-title);
+    text-transform: uppercase;
+    letter-spacing: .35em;
+    font-size: clamp(.8rem, 2.6vw, 1rem);
+    color: var(--gold-light);
+}
+
+.names {
+    font-family: var(--font-script);
+    font-weight: 400;
+    font-size: clamp(3.4rem, 13vw, 6rem);
+    line-height: 1.1;
+    color: #fff;
+    text-shadow: 0 2px 18px rgba(0,0,0,.35), 0 0 30px rgba(230, 207, 143, .35);
+}
+
+.hero-date {
+    font-family: var(--font-title);
+    letter-spacing: .3em;
+    font-size: .95rem;
+    color: var(--ice);
+    margin-bottom: 1.4rem;
+}
+
+.scroll-indicator { animation: scrollBounce 2s ease-in-out infinite; }
+.scroll-mouse {
+    width: 24px;
+    height: 38px;
+    margin: 0 auto;
+    border: 2px solid rgba(255,255,255,.85);
+    border-radius: 14px;
+    display: flex;
+    justify-content: center;
+    padding-top: 6px;
+}
+.scroll-wheel {
+    width: 3px;
+    height: 8px;
+    border-radius: 2px;
+    background: var(--gold-light);
+    animation: wheel 1.6s ease-in-out infinite;
+}
+
+/* =========================================================
+   Contenido: fondo celeste con destellos
+   ========================================================= */
+.content {
+    position: relative;
+    z-index: 1;
+    margin-top: 100vh;
+    margin-top: 100svh;
+    width: 100%;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+    background:
+        url('brillos.png') repeat,
+        radial-gradient(ellipse 120% 60% at 50% 0%, var(--ice) 0%, rgba(238,243,250,0) 70%),
+        linear-gradient(180deg, var(--sky) 0%, #D3DFEE 50%, var(--mist) 100%);
+    background-size: 420px, 100% 1600px, 100% 100%;
+    background-repeat: repeat, no-repeat, no-repeat;
+    box-shadow: 0 -10px 40px rgba(14, 26, 48, .35);
+}
+
+/* Segunda capa de destellos que titila */
+.content::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url('brillos.png') repeat;
+    background-size: 300px;
+    background-position: 140px 90px;
+    opacity: .5;
+    pointer-events: none;
+    animation: twinkle 4s ease-in-out infinite;
+    z-index: 0;
+}
+
+.content > * { position: relative; z-index: 1; }
+
+section {
+    width: 100%;
+    padding: 4.5rem 1.25rem;
+    text-align: center;
+}
+
+/* Separador floral sobre las uniones */
+.section-divider {
+    height: 0;
+    overflow: visible;
+    pointer-events: none;
+    z-index: 2;
+}
+.section-divider img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(440px, 86vw);
+    display: block;
+    filter: drop-shadow(0 6px 10px rgba(30, 53, 87, .18));
+}
+
+/* Títulos */
+.section-title,
+.event-title {
+    font-family: var(--font-title);
+    font-weight: 500;
+    color: var(--royal);
+    font-size: clamp(2rem, 6.5vw, 2.9rem);
+    line-height: 1.15;
+    margin-bottom: .9rem;
+}
+
+.section-subtitle {
+    color: var(--text);
+    max-width: 34rem;
+    margin: 0 auto 2.2rem;
+}
+
+.script-title {
+    font-family: var(--font-script);
+    font-weight: 400;
+    color: var(--royal);
+    font-size: clamp(2.8rem, 9vw, 3.6rem);
+    line-height: 1;
+}
+
+/* Línea dorada con corazón */
+.gold-rule {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .6rem;
+    width: min(220px, 60%);
+    margin: .6rem auto 1.2rem;
+    color: var(--gold);
+    font-size: .8rem;
+}
+.gold-rule::before,
+.gold-rule::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold) 40%, var(--gold));
+}
+.gold-rule::after { background: linear-gradient(90deg, var(--gold), var(--gold) 60%, transparent); }
+.gold-rule.wide { width: min(520px, 88%); margin: .4rem auto .9rem; }
+
+/* Íconos de sección (elementos del tema) */
+.section-icon {
+    display: block;
+    margin: 0 auto 1.25rem;
+    height: 120px;
+    width: auto;
+    filter: drop-shadow(0 8px 14px rgba(30, 53, 87, .22));
+    animation: float 4s ease-in-out infinite;
+}
+.section-icon.bow { height: 105px; }
+.section-icon.clock { height: 170px; }
+
+/* =========================================================
+   Escena del castillo + cuenta regresiva
+   ========================================================= */
+.countdown-section {
+    padding: 5rem 0 3.5rem;
+}
+
+
+.countdown-card {
+    position: relative;
+    width: min(620px, calc(100% - 2rem));
+    margin: 0 auto;
+    padding: 2.6rem 1.25rem 4.2rem;
+    background:
+        radial-gradient(ellipse at 50% 0%, #fff 0%, var(--ivory) 70%);
+    border-radius: 140px / 46px;
+    box-shadow:
+        0 0 0 2px var(--gold),
+        0 0 0 7px var(--ivory),
+        0 0 0 8px var(--gold-light),
+        0 18px 40px -12px rgba(30, 53, 87, .45);
+}
+
+.card-crown {
+    position: absolute;
+    top: -46px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    filter: drop-shadow(0 4px 8px rgba(30, 53, 87, .3));
+}
+
+.card-flowers {
+    position: absolute;
+    left: 50%;
+    bottom: -62px;
+    transform: translateX(-50%);
+    width: min(360px, 82%);
+    filter: drop-shadow(0 6px 10px rgba(30, 53, 87, .2));
+}
+
+.countdown-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 30rem;
+    margin: 0 auto;
+}
+
+.countdown-item { position: relative; }
+.countdown-item:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 12%;
+    height: 76%;
+    width: 1px;
+    background: var(--royal);
+    opacity: .55;
+}
+
+.countdown-number {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: clamp(1.8rem, 7vw, 2.5rem);
+    line-height: 1.2;
+    color: var(--royal);
+    font-variant-numeric: tabular-nums;
+}
+
+.countdown-label {
+    font-size: clamp(.62rem, 2.2vw, .75rem);
+    font-weight: 500;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--text);
+}
+
+/* =========================================================
+   Evento
+   ========================================================= */
+.events-section {
+    position: relative;
+    padding-top: 4.5rem;
+    padding-bottom: 6rem;
+    overflow: hidden;
+}
+
+.event-card {
+    position: relative;
+    z-index: 1;
+    max-width: 560px;
+    margin: 0 auto;
+}
+
+.slipper {
+    display: block;
+    width: 170px;
+    margin: 0 auto .5rem;
+    filter: drop-shadow(0 10px 18px rgba(30, 53, 87, .3));
+    animation: float 4.5s ease-in-out infinite;
+}
+
+.event-title { margin: .2rem 0; }
+
+.event-details { margin: 1.4rem 0; }
+
+.event-details h4 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--royal);
+    margin-bottom: .35rem;
+}
+.event-details p { color: var(--text); font-size: 1.05rem; }
+
+.event-punctuality {
+    font-family: var(--font-italic);
+    font-style: italic;
+    font-size: 1.12rem !important;
+    color: var(--slate) !important;
+    margin-top: .2rem;
+}
+
+.event-address { font-size: .95rem !important; }
+
+
+/* =========================================================
+   Galería
+   ========================================================= */
+.gallery-container { max-width: 64rem; margin: 0 auto; }
+
+.carousel-container {
+    position: relative;
+    max-width: 820px;
+    margin: 0 auto 1.25rem;
+}
+.carousel-track-container { overflow: hidden; width: 100%; }
+.carousel-track {
+    display: flex;
+    gap: 1rem;
+    padding: 1.5rem 1rem;
+    transition: transform .5s ease;
+}
+.carousel-item {
+    flex: 0 0 calc((100% - 2rem) / 3);
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.framed-photo {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    background: var(--ivory);
+    border: 6px solid var(--ivory);
+    border-bottom-width: 22px;
+    outline: 1px solid var(--gold);
+    outline-offset: -3px;
+    box-shadow: 0 12px 26px -8px rgba(30, 53, 87, .45);
+    transition: transform .3s ease, box-shadow .3s ease;
+}
+
+@media (min-width: 769px) {
+    .carousel-item.is-center { z-index: 2; }
+    .carousel-item.is-center .framed-photo {
+        transform: scale(1.1);
+        box-shadow: 0 26px 50px -12px rgba(30, 53, 87, .55);
+    }
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 3;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1.5px solid var(--gold-light);
+    background: rgba(93, 121, 156, .92);
+    color: #fff;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(30, 53, 87, .35);
+}
+.carousel-prev { left: 4px; }
+.carousel-next { right: 4px; }
+
+.carousel-counter {
+    font-family: var(--font-italic);
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--slate);
+}
+
+/* =========================================================
+   Fiesta
+   ========================================================= */
+.party-container { max-width: 64rem; margin: 0 auto; }
+
+.party-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 290px));
+    justify-content: center;
+    gap: 2rem;
+}
+
+.party-card {
+    padding: 2.4rem 1.6rem;
+    border-radius: 28px;
+    background: rgba(251, 248, 242, .82);
+    box-shadow:
+        0 0 0 1.5px var(--gold),
+        0 0 0 6px rgba(251, 248, 242, .6),
+        0 0 0 7px var(--gold-light),
+        0 16px 34px -14px rgba(30, 53, 87, .4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.party-icon {
+    height: 80px;
+    width: auto;
+    margin-bottom: 1.1rem;
+    filter: drop-shadow(0 6px 10px rgba(30, 53, 87, .2));
+}
+.party-icon.tall { height: 110px; }
+
+.party-card h3 {
+    font-family: var(--font-title);
+    font-weight: 500;
+    font-size: 1.35rem;
+    color: var(--royal);
+    margin-bottom: .6rem;
+}
+.party-card p { color: var(--text); margin-bottom: 1.4rem; }
+.party-card .btn-royal { margin-top: auto; }
+
+/* =========================================================
+   Regalos / Confirmación
+   ========================================================= */
+.gifts-container,
+.rsvp-container { max-width: 34rem; margin: 0 auto; }
+
+.rsvp-section { padding-bottom: 5rem; }
+
+/* =========================================================
+   Pie
+   ========================================================= */
+.footer {
+    position: relative;
+    text-align: center;
+    padding: 3rem 1rem 3.5rem;
+    color: var(--ice);
+    background:
+        url('brillos.png') repeat,
+        radial-gradient(ellipse at 50% 0%, #2C4D7E 0%, var(--navy) 55%, var(--navy-deep) 100%);
+    background-size: 360px, cover;
+}
+.footer-scene {
+    position: relative;
+    width: min(560px, 100%);
+    height: clamp(300px, 78vw, 440px);
+    margin: -120px auto 1.25rem;
+}
+.footer-castle {
+    position: absolute;
+    right: 4%;
+    top: 0;
+    width: 64%;
+    filter: drop-shadow(0 0 26px rgba(230, 207, 143, .45));
+}
+.footer-princess {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 62%;
+    filter: drop-shadow(0 0 22px rgba(169, 198, 236, .45)) drop-shadow(0 14px 18px rgba(0,0,0,.35));
+}
+/* Halo de luz bajo sus pies */
+.footer-scene::after {
+    content: "";
+    position: absolute;
+    left: 8%;
+    bottom: -12px;
+    width: 70%;
+    height: 40px;
+    background: radial-gradient(ellipse at center, rgba(230,207,143,.35), transparent 70%);
+    pointer-events: none;
+}
+
+/* Estrellas que brillan (las crea JAVAB.js) */
+.twinkle-star {
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+    width: var(--s, 14px);
+    height: var(--s, 14px);
+    opacity: 0;
+    animation: starShine var(--d, 3s) ease-in-out var(--delay, 0s) infinite;
+}
+.twinkle-star::before,
+.twinkle-star::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: #fff;
+    clip-path: polygon(50% 0, 58% 42%, 100% 50%, 58% 58%, 50% 100%, 42% 58%, 0 50%, 42% 42%);
+}
+.twinkle-star::after {
+    inset: 25%;
+    border-radius: 50%;
+    clip-path: none;
+    box-shadow: 0 0 10px 4px rgba(255,255,255,.9), 0 0 22px 8px var(--glow, rgba(169,198,236,.7));
+}
+.twinkle-star.gold { --glow: rgba(230,207,143,.75); }
+.twinkle-star.gold::before { background: #FFF4D6; }
+
+@keyframes starShine {
+    0%, 100% { opacity: 0; transform: scale(.3) rotate(0deg); }
+    45%, 55% { opacity: 1; transform: scale(1) rotate(20deg); }
+}
+.footer p { font-family: var(--font-italic); font-style: italic; font-size: 1.15rem; }
+.footer h3 {
+    font-family: var(--font-script);
+    font-weight: 400;
+    font-size: 3.2rem;
+    line-height: 1.2;
+    color: var(--gold-light);
+}
+.footer .footer-date {
+    font-family: var(--font-title);
+    font-style: normal;
+    letter-spacing: .2em;
+    font-size: .9rem;
+    margin-top: .5rem;
+    color: var(--ice);
+}
+
+/* =========================================================
+   Modal código de vestimenta
+   ========================================================= */
+.dresscode-modal {
+    position: relative;
+    width: min(420px, 92%);
+    padding: 3rem 1.75rem 2.25rem;
+    text-align: center;
+    border-radius: 22px;
+    background:
+        url('brillos.png') repeat,
+        linear-gradient(160deg, #2C4D7E 0%, var(--navy) 60%, var(--navy-deep) 100%);
+    background-size: 320px, cover;
+    box-shadow: 0 0 0 1.5px var(--gold), 0 24px 60px rgba(0,0,0,.45);
+}
+.modal-crown {
+    position: absolute;
+    top: -38px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 110px;
+}
+.modal-title {
+    font-family: var(--font-title);
+    font-weight: 500;
+    font-size: 1.6rem;
+    color: var(--gold-light);
+    margin-bottom: .75rem;
+}
+.modal-text { color: var(--ivory); font-size: 1.1rem; }
+.modal-text.soft { color: rgba(238,243,250,.75); font-size: .98rem; margin-top: .4rem; }
+
+.dresscode-colors {
+    display: flex;
+    justify-content: center;
+    gap: .8rem;
+    margin-top: 1.2rem;
+}
+.color-dot {
+    position: relative;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,.4);
+    box-shadow: 0 2px 6px rgba(0,0,0,.3);
+}
+.color-dot::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: 50%;
+    background: linear-gradient(to top right, transparent 45%, rgba(220,40,40,.9) 48%, rgba(220,40,40,.9) 52%, transparent 55%);
+}
+
+.modal-close {
+    position: absolute;
+    top: .6rem;
+    right: .9rem;
+    background: none;
+    border: none;
+    color: var(--ivory);
+    font-size: 1.8rem;
+    line-height: 1;
+    cursor: pointer;
+}
+.modal-close:hover { color: var(--gold-light); }
+
+/* Toast */
+.toast {
+    position: fixed;
+    top: 5rem;
+    right: 1rem;
+    max-width: 320px;
+    padding: 1rem 1.25rem;
+    border-radius: 12px;
+    background: rgba(22, 41, 74, .95);
+    border: 1px solid var(--gold);
+    color: #fff;
+    z-index: 1000;
+    opacity: 0;
+    transform: translateX(120%);
+    transition: all .3s ease;
+}
+.toast.show { opacity: 1; transform: translateX(0); }
+
+/* =========================================================
+   Animaciones
+   ========================================================= */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+@keyframes twinkle {
+    0%, 100% { opacity: .15; }
+    50% { opacity: .6; }
+}
+@keyframes scrollBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
+}
+@keyframes wheel {
+    0% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(10px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+@media (max-width: 768px) {
+    section { padding: 4rem 1rem; }
+
+    .carousel-item { flex: 0 0 100%; height: auto; overflow: hidden; padding: 0 10px; }
+    .carousel-item .framed-photo { max-height: 420px; }
+    .carousel-track { gap: 0; padding: 1rem 0; }
+    .carousel-btn { width: 38px; height: 38px; font-size: .95rem; }
+
+    .countdown-card {
+        border-radius: 90px / 36px;
+        padding: 2.3rem .75rem 3.8rem;
+    }
+    .card-crown { width: 100px; top: -38px; }
+    .card-flowers { bottom: -50px; }
+
+    .slipper { width: 140px; }
+    .section-icon { height: 100px; }
+    .section-icon.clock { height: 140px; }
+    .party-grid { grid-template-columns: minmax(0, 320px); }
+}
+
+@media (max-width: 480px) {
+    .carousel-item .framed-photo { max-height: 360px; }
+    .framed-photo { border-width: 4px; border-bottom-width: 16px; }
+    .event-details p { font-size: 1rem; }
+}
+
+.welcome-hero { position: relative; z-index: 1; }
+.footer > *:not(.twinkle-star) { position: relative; z-index: 1; }
+.content { overflow-x: clip; }
+.twinkle-star { margin-left: calc(var(--s, 14px) / -2); }
+
+/* ===== Cintas largas por las orillas (solo contador + fiesta) ===== */
+.intro-block { position: relative; width: 100%; }
+.intro-block > section { position: relative; z-index: 1; }
+.intro-block > .ribbon-rail {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 150px;
+    z-index: 0;
+    pointer-events: none;
+    background: url('cinta.png') repeat-y;
+    -webkit-mask-image: linear-gradient(180deg, #000 85%, transparent 100%);
+    mask-image: linear-gradient(180deg, #000 85%, transparent 100%);
+    background-size: 100% auto;
+    background-position: center -40px;
+    filter: drop-shadow(0 6px 10px rgba(30, 53, 87, .18));
+    opacity: .95;
+}
+.intro-block > .ribbon-left { left: 0; transform: scaleX(-1); }
+.intro-block > .ribbon-right { right: 0; }
+
+@media (max-width: 768px) {
+    .intro-block > .ribbon-rail { width: 72px; opacity: .9; }
+    .intro-block > .ribbon-left { left: -10px; }
+    .intro-block > .ribbon-right { right: -10px; }
+    .intro-block section { padding-left: 2.4rem; padding-right: 2.4rem; }
+    .intro-block .countdown-section { padding-left: 0; padding-right: 0; }
+    .countdown-section { padding-left: 0; padding-right: 0; }
+}
+
+/* ===== Modal de regalos ===== */
+.gifts-modal .modal-text.soft { margin: 0 0 1.25rem; }
+.bank-card {
+    background: rgba(251, 248, 242, .08);
+    border: 1px solid rgba(230, 207, 143, .55);
+    border-radius: 14px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.4rem;
+}
+.bank-label {
+    font-size: .72rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-top: .55rem;
+}
+.bank-label:first-child { margin-top: 0; }
+.bank-value { color: var(--ivory); font-size: 1.05rem; font-weight: 500; }
+.bank-number { font-size: 1.3rem; letter-spacing: .08em; font-variant-numeric: tabular-nums; }
+
+/* ===== Botones de copiar (solo ícono) ===== */
+.copy-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .6rem;
+}
+.copy-btn {
+    width: 34px;
+    height: 34px;
+    flex: 0 0 34px;
+    border-radius: 50%;
+    border: 1px solid var(--gold-light);
+    background: rgba(230, 207, 143, .12);
+    color: var(--gold-light);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color .2s ease, transform .2s ease;
+}
+.copy-btn:hover { background: rgba(230, 207, 143, .25); transform: scale(1.06); }
+.copy-btn.copied { background: var(--gold-light); color: var(--navy); }
+.gifts-modal .bank-card { margin-bottom: 0; }
+
+/* ===== Galería: fotos más grandes sin agrandar la sección ===== */
+.gallery-section { padding-top: 3.25rem; padding-bottom: 3rem; }
+.gallery-section .section-icon { height: 84px; margin-bottom: .6rem; }
+.gallery-section .section-subtitle { margin-bottom: .6rem; }
+.gallery-section .carousel-container { max-width: 1000px; margin-bottom: .4rem; }
+.gallery-section .carousel-track { padding: 1.4rem .5rem; gap: .9rem; }
+.gallery-section .carousel-item { height: 420px; }
+@media (min-width: 769px) {
+    .gallery-section .carousel-item.is-center .framed-photo { transform: scale(1.05); }
+}
+@media (max-width: 768px) {
+    .gallery-section { padding-top: 3rem; padding-bottom: 2.6rem; }
+    .gallery-section .section-icon { height: 76px; }
+    .gallery-section .carousel-track { padding: .6rem 0; gap: 0; }
+    .gallery-section .carousel-item { height: 482px; padding: 0 2px; }
+    .gallery-section .carousel-item .framed-photo { max-height: 100%; max-width: 100%; margin: 0 auto; }
+    .gallery-section .carousel-btn { width: 34px; height: 34px; }
+    .gallery-section .carousel-prev { left: -2px; }
+    .gallery-section .carousel-next { right: -2px; }
+}
+.copy-row .bank-number { white-space: nowrap; font-size: clamp(1.05rem, 4.6vw, 1.3rem); letter-spacing: .05em; }
+
+/* ===== Bendición en la iglesia ===== */
+.church-section { padding-bottom: 3rem; }
+.church-section + .events-section { padding-top: 2.5rem; }
+.church-icon {
+    display: block;
+    width: clamp(150px, 42vw, 200px);
+    height: auto;
+    margin: 0 auto .6rem;
+    filter: drop-shadow(0 6px 10px rgba(30, 53, 87, .22));
+    animation: float 4.5s ease-in-out infinite;
+}
+.btn-royal .btn-icon { flex: 0 0 auto; margin-left: -.2rem; }
+
+/* ===== Galería: carrusel 3D (coverflow) =====
+   La foto del centro ocupa todo el alto disponible y las otras se asoman
+   a los lados en 3D. Mismo alto de sección que antes. */
+.gallery-section .carousel-track-container {
+    position: relative;
+    height: 454px;
+    overflow: hidden;
+    perspective: 1100px;
+}
+.gallery-section .carousel-track {
+    position: relative;
+    height: 100%;
+    padding: 0;
+    gap: 0;
+    transform: none !important;
+    transform-style: preserve-3d;
+}
+.gallery-section .carousel-item {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: min(78%, 330px);
+    height: 100%;
+    padding: 6px 0;
+    flex: none;
+    overflow: visible;
+    cursor: pointer;
+    transform: translateX(-50%) translateZ(-300px) scale(.6);
+    opacity: 0;
+    z-index: 1;
+    transition: transform .6s cubic-bezier(.22,.8,.3,1), opacity .6s ease, filter .6s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+.gallery-section .carousel-item.is-active {
+    transform: translateX(-50%) translateZ(0);
+    opacity: 1;
+    z-index: 3;
+    cursor: default;
+}
+.gallery-section .carousel-item.is-prev {
+    transform: translateX(-102%) translateZ(-140px) rotateY(35deg) scale(.9);
+    opacity: 1;
+    filter: brightness(.82);
+    z-index: 2;
+}
+.gallery-section .carousel-item.is-next {
+    transform: translateX(2%) translateZ(-140px) rotateY(-35deg) scale(.9);
+    opacity: 1;
+    filter: brightness(.82);
+    z-index: 2;
+}
+.gallery-section .carousel-item .framed-photo {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    margin: 0 auto;
+    object-fit: cover;
+    object-position: center 22%;
+    border: 3px solid var(--ivory);
+    border-radius: 20px;
+    outline: none;
+    transform: none !important;
+    box-shadow:
+        0 0 0 1.5px var(--gold),
+        0 16px 30px -10px rgba(30, 53, 87, .5);
+}
+.gallery-section .carousel-btn { z-index: 5; }
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+    margin: .3rem 0 .2rem;
+}
+.carousel-dots button {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: 0;
+    border-radius: 5px;
+    background: #9FB3CF;
+    cursor: pointer;
+    transition: width .3s ease, background-color .3s ease;
+}
+.carousel-dots button.active { width: 22px; background: var(--gold); }
+
+@media (min-width: 769px) {
+    .gallery-section .carousel-item.is-prev { transform: translateX(-128%) translateZ(-140px) rotateY(32deg) scale(.92); }
+    .gallery-section .carousel-item.is-next { transform: translateX(28%) translateZ(-140px) rotateY(-32deg) scale(.92); }
+}
+@media (max-width: 768px) {
+    .gallery-section .carousel-track-container { height: 490px; }
+    .gallery-section .carousel-item { padding: 6px 0; }
+}
